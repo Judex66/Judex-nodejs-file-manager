@@ -1,7 +1,8 @@
 import {readdir} from 'fs/promises';
 import { existsSync } from 'fs';
-const list = async () => {
-    const fileWay ='src/fs/files';
+import {wayToFile} from '../../wayToFile.js';
+export const list = async () => {
+    const fileWay =wayToFile;
     if( existsSync(fileWay))
     {
         console.log(await readdir(fileWay));

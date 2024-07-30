@@ -1,12 +1,12 @@
 import {writeFile} from "fs/promises";
 import { existsSync } from 'fs';
-const create = async () => {
-    const fileWay ='src/fs/files';
-    const fileName ='flesh.txt';
-    const fileContent = 'I am fresh and young';
+import {wayToFile} from '../../wayToFile.js';
+export const create = async (data) => {
+    let fileWay = wayToFile;
+    let fileName = await data.trim().replace('cr ', '');
     if( !existsSync(`${fileWay}/${fileName}`))
     {
-   await writeFile(`${fileWay}/${fileName}`,fileContent,'utf-8',import.meta.url);
+   await writeFile(`${fileWay}/${fileName}`,import.meta.url);
     }
     else
     {

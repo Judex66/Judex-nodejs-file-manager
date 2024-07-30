@@ -1,7 +1,8 @@
 import {readFile} from "fs/promises";
 import { existsSync } from 'fs';
-const read = async () => {
-    const fileWay ='src/fs/files/fileToRead.txt';
+import {wayToFile} from '../../wayToFile.js';
+export const read = async () => {
+    const fileWay = wayToFile;
     if(existsSync(fileWay))
     {
         const readingContent = await readFile(fileWay, 'utf-8',import.meta.url);

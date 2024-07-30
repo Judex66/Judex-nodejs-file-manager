@@ -1,8 +1,9 @@
 import {rename as renameFile} from 'fs/promises';
 import { existsSync } from 'fs';
-const rename = async () => {
-    const fileWay ='src/fs/files';
-    const wrongName = 'wrongFilename.txt'; 
+import {wayToFile} from '../../wayToFile.js';
+export const rename = async (data) => {
+    const fileWay = wayToFile;
+    const wrongName = data.trim().replace('rm ', '');  
     const rightName = 'properFilename.md';
     if(!existsSync(`${fileWay}/${rightName}`))
     { 
