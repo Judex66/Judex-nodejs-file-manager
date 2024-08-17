@@ -1,17 +1,16 @@
-import {rm} from 'fs/promises';
-import { existsSync } from 'fs';
-import {wayToFile} from '../../wayToFile.js';
+import {unlink} from 'fs/promises';
+import * as path from 'path';
+import {wayToFile} from '../fileWay/waytoFile';
 export const remove = async (data) => {
-    let fileWay = wayToFile;
-    let removeFile = await data.trim().replace('rm ', ''); 
-    if( existsSync(`${fileWay}/${removeFile}`))
-    {
-       await rm(`${fileWay}/${removeFile}`);
+    let removeFile = await data.trim().replace('rm ', '');
+    let fileWay = path.isAbsolute(removeFile) ? removeFile : path.join(wayToFile, `${removeFile}`); 
+    try{
+        await unlink(fileWay);
+
+        console.log(`You are currently in ${wayToFile}`);
     }
-    else
-    {
-        console.log("FS operation failed");
+    catch (err) {
+        console.log('Operation failed');
     }
 }
 
-await remove();

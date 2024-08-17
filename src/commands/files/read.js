@@ -1,17 +1,12 @@
 import {readFile} from "fs/promises";
-import { existsSync } from 'fs';
-import {wayToFile} from '../../wayToFile.js';
-export const read = async () => {
-    const fileWay = wayToFile;
-    if(existsSync(fileWay))
-    {
-        const readingContent = await readFile(fileWay, 'utf-8',import.meta.url);
-        console.log(readingContent);
-    } 
-    else
-    {
-        console.log("FS operation failed");
-    }  
+import * as path from 'path';
+import {wayToFile} from '../fileWay/waytoFile.js';
+export const read = async (data) => {
+    const readfile = data.trim().replace('cat ', '');
+    let wayReadFile = path.isAbsolute(readfile) ? readfile : path.join(wayToFile, `${readfile}`)
+   try{     
+    const readingContent = await readFile(wayReadFile, 'utf-8',import.meta.url);
+    console.log(readingContent);}
+   catch{console.log("FS operation failed");}
+  
 };
-
-await read();

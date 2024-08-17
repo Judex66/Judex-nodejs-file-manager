@@ -1,17 +1,13 @@
 import {writeFile} from "fs/promises";
-import { existsSync } from 'fs';
-import {wayToFile} from '../../wayToFile.js';
+import {wayToFile} from '../fileWay/waytoFile.js';
 export const create = async (data) => {
-    let fileWay = wayToFile;
-    let fileName = await data.trim().replace('cr ', '');
-    if( !existsSync(`${fileWay}/${fileName}`))
-    {
-   await writeFile(`${fileWay}/${fileName}`,import.meta.url);
+    let createFile = await data.trim().replace('add ', '');
+    try{
+        await writeFile(`${wayToFile}/${createFile}`,import.meta.url);
+        console.log(`You are currently in ${wayToFile}`);
     }
-    else
-    {
-        console.log("FS operation failed");
+    catch(err){
+console.log(err)
+console.log('Operation failed');
     }
 };
-
-await create();
