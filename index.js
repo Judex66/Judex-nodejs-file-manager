@@ -7,6 +7,10 @@ import { upDir } from './src/commands/fileWay/upDir.js';
 import { wayToDir } from './src/commands/fileWay/enterDir.js';
 import { renameFile } from './src/commands/files/rename.js';
 import { create } from './src/commands/files/create.js';
+import { copy } from './src/commands/files/copy.js';
+import {calculateHash} from './src/commands/hash/hash.js';
+import {compress} from './src/commands/zip/compress.js';
+import {decompress} from './src/commands/zip/decompress.js';
 const control = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -38,9 +42,18 @@ control.on('line', async (line) => {
                     case 'add':
                         await create(line);
                         break;
-        // case 'rm':
-        //     await remove(line);
-        //     break;
+        case 'cp':
+            await copy(line);
+            break;
+            case 'hash':
+                await calculateHash(line);
+                break;
+                case 'comp':
+                    await compress(line);
+                    break;
+                    case 'dec':
+                        await decompress(line);
+                        break;
         default:
             console.log('Invalid input');
             break;
