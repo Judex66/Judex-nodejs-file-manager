@@ -8,7 +8,7 @@ export const remove = async (data) => {
     try{
         await rm(fileWay);
 
-        console.log(`You are currently in ${wayToFile}`);
+        console.log(`You are in ${wayToFile}`);
         list()
     }
     catch (err) {

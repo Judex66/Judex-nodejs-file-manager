@@ -5,7 +5,7 @@ export const create = async (data) => {
     let createFile = await data.trim().replace('add ', '');
     try{
         await writeFile(`${wayToFile}/${createFile}`,import.meta.url);
-        console.log(`You are currently in ${wayToFile}`);
+        console.log(`You are in ${wayToFile}`);
         list()
     }
     catch(err){
