@@ -1,10 +1,10 @@
 import * as path from 'path';
-import {access} from 'fs/promises';
+import {access, rm} from 'fs/promises';
 import { createReadStream, createWriteStream } from 'fs';
 import {wayToFile} from '../fileWay/waytoFile.js';
-
-export const copy = async (data) => {
-    const commandCopy =  data.trim().replace('cp ', '');
+import {list} from './list.js'
+export const move = async (data) => {
+    const commandCopy =  data.trim().replace('mv ', '');
     const [ fileCopy, newDir ] = commandCopy.split(' ');
 
     try {
@@ -20,10 +20,12 @@ export const copy = async (data) => {
         let writeStream = createWriteStream(wayToCopy);
 
         readStream.pipe(writeStream);
+        await rm(wayofFile);
         console.log(`You are in ${wayToFile}`);
+        list()
    }
    catch(err){
-    //console.log(err)
+   // console.log(err)
     console.log('Operation failed');
    }
 };
